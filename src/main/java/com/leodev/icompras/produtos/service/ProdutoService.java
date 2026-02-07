@@ -1,0 +1,28 @@
+package com.leodev.icompras.produtos.service;
+
+import com.leodev.icompras.produtos.model.Produto;
+import com.leodev.icompras.produtos.repository.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class ProdutoService {
+
+    private final ProdutoRepository repository;
+
+    public Produto salvar(Produto produto){
+        return repository.save(produto);
+    }
+
+    public Optional<Produto> obterPorCodigo(Long codigo){
+        return repository.findById(codigo);
+    }
+
+    public void deletar(Long id){
+        repository.deleteById(id);
+    }
+}
