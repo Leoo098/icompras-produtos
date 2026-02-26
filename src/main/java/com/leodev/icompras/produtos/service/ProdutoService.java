@@ -22,7 +22,8 @@ public class ProdutoService {
         return repository.findById(codigo);
     }
 
-    public void deletar(Long id){
-        repository.deleteById(id);
+    public void deletar(Produto produto) {
+        produto.setAtivo(false);
+        repository.save(produto);
     }
 }
