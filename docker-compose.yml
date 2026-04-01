@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:17.4
+    container_name: postgres_icompras_produtos
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: icompras_produtos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5556:5432"
+    volumes:
+      - produtos-data:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  produtos-data:
