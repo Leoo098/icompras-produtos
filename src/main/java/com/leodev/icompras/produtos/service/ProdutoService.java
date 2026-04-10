@@ -2,6 +2,7 @@ package com.leodev.icompras.produtos.service;
 
 import com.leodev.icompras.produtos.model.Produto;
 import com.leodev.icompras.produtos.repository.ProdutoRepository;
+import com.leodev.icompras.produtos.service.exception.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,10 @@ public class ProdutoService {
     private final ProdutoRepository repository;
 
     public Produto salvar(Produto produto){
+        if (repository.existsByNome(produto.getNome())){
+            throw new ValidationException("Já existe um produto cadastrado com este nome.");
+        }
+
         return repository.save(produto);
     }
 
